@@ -1,3 +1,27 @@
+:root {
+  --primary-color: #48319d;
+  --secondary-color: #48319d32;
+  --text-color: #343a40;
+  --app-bg-color: #1f1d47;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* * {
+  color: var(--text-color);
+  background-color: var(--app-bg-color);
+}
+ */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+
+.border-primary {
+  border-color: var(--primary-color);
+}

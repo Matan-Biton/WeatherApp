@@ -1,43 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface GeoLocation {
-  longtitude: number;
-  latitude: number;
+interface ForecatsType {
+  type: "weather" | "forecast";
+  interest: "hourly" | "3days" | "5days";
+  data: unknown;
 }
-
-interface WeatherState {
-  searchBy: "city" | "geoLocation";
-  city: string;
-  geoLocation: GeoLocation;
-  loading: boolean;
-}
-
-const initialState: WeatherState = {
-  searchBy: "geoLocation",
-  city: "",
-  geoLocation: { longtitude: 0, latitude: 0 },
-  loading: false,
+const initialState: ForecatsType = {
+  type: "weather",
+  interest: "hourly",
+  data: null,
 };
 
 export const weatherSlice = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    toggleSearchBy: (state) => {
-      state.searchBy = state.searchBy === "city" ? "geoLocation" : "city";
+    setInterest: (
+      state,
+      action: PayloadAction<"hourly" | "3days" | "5days">
+    ) => {
+      state.interest = action.payload;
+      state.type = action.payload === "hourly" ? "weather" : "forecast";
     },
-    setCity: (state, action: PayloadAction<string>) => {
-      state.city = action.payload;
-    },
-    setGeoLocation: (state, action: PayloadAction<GeoLocation>) => {
-      state.geoLocation = action.payload;
-    },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
+    setData: (state, action: PayloadAction<unknown>) => {
+      state.data = action.payload;
     },
   },
 });
 
-export const { setCity, setLoading, setGeoLocation, toggleSearchBy } =
-  weatherSlice.actions;
+export const { setInterest, setData } = weatherSlice.actions;
 export default weatherSlice.reducer;

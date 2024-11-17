@@ -1,27 +1,38 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./store/store";
 import Form from "./components/Form";
-import { useAppSelector, useAppDispatch } from "./store/store";
-import { toggleSearchBy } from "./store/weatherSlice";
+import Settings from "./components/Settings";
+import Data from "./components/Data";
+import { setShowSettings } from "./store/UISlice";
 
 function App() {
   const dispatch = useAppDispatch();
-  const searchBy = useAppSelector((state) => state.weather.searchBy);
-  const inputFields =
-    searchBy === "city" ? ["City"] : ["Latitude", "Longitude"];
+  const { showSettings, theme } = useAppSelector((state) => state.ui);
 
-  function handleSearchBy() {
-    dispatch(toggleSearchBy());
-  }
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="bg-slate-200 flex flex-col justify-center items-center h-screen">
-        <h1 className="font-bold text-6xl py-4">What's The Weather</h1>
-        <Form fields={inputFields} />
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-white dark:bg-gray-800 dark:text-white transition-colors duration-200">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl sm:text-4xl font-bold">Weather App</h1>
+        <button
+          onClick={() => dispatch(setShowSettings(true))}
+          className="bg-gray-200 dark:bg-gray-700 p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600"
+        >
+          ⚙️ Settings
+        </button>
       </div>
-      <button
-        onClick={handleSearchBy}
-        className="border-2 border-black rounded-md py-1 px-2"
-      >{`Use ${searchBy === "city" ? "geo location" : "city"} instead`}</button>
+
+      <Form />
+      <Data />
+
+      {showSettings && <Settings />}
     </div>
   );
 }
