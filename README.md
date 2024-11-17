@@ -13,7 +13,7 @@ A modern weather application built with React, TypeScript, and Redux Toolkit. Ge
 
 1. Clone the repository:
 
-git clone https://github.com/yourusername/weather-app.git
+git clone https://github.com/Matan-Biton/WeatherApp/tree/main/src
 
 2. Install dependencies:
 
