@@ -15,7 +15,10 @@ function Data() {
           {data.list ? (
             <div>
               {data.list
-                .filter((_, index) => index % 8 === 0)
+                .filter(
+                  (_, index) =>
+                    index % 8 === 0 && index < (interest === "3days" ? 24 : 40)
+                )
                 .map((item) => (
                   <div key={item.dt}>
                     <p>
