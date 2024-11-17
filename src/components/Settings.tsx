@@ -38,19 +38,19 @@ const Settings = () => {
           <Selection
             options={[
               {
-                name: "Hourly",
-                isSelected: interest === "hourly",
-                onClick: () => dispatch(setInterest("hourly")),
+                name: "Today",
+                isSelected: interest === "1-day",
+                onClick: () => dispatch(setInterest("1-day")),
               },
               {
                 name: "3 Days",
-                isSelected: interest === "3days",
-                onClick: () => dispatch(setInterest("3days")),
+                isSelected: interest === "3-days",
+                onClick: () => dispatch(setInterest("3-days")),
               },
               {
                 name: "5 Days",
-                isSelected: interest === "5days",
-                onClick: () => dispatch(setInterest("5days")),
+                isSelected: interest === "5-days",
+                onClick: () => dispatch(setInterest("5-days")),
               },
             ]}
           />

@@ -17,7 +17,7 @@ export interface WeatherResponse {
     speed: number;
   };
   name: string;
-  cod: number;
+  dt: number;
 }
 
 export interface ForecastResponse {
@@ -56,7 +56,12 @@ export const weatherApi = createApi({
           dispatch(setData(data));
           dispatch(setError(null));
         } catch (error) {
-          dispatch(setError(error.error.data.message));
+          dispatch(
+            setError(
+              (error as { error: { data: { message: string } } }).error.data
+                .message
+            )
+          );
         } finally {
           dispatch(setIsLoading(false));
         }
